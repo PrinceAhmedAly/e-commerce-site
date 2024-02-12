@@ -1,0 +1,82 @@
+<div class="container my-5">
+
+    <h1>Choose Your Category</h1>
+    <div class="form my-3">
+        <select name="" id="" class="form-control" [(ngModel)]="selectedCatId">
+            <option value="" selected>Please Select</option>
+            <option *ngFor="let cat of categories" value="{{cat.id}}">{{cat.name}}</option>
+        </select>
+    </div>
+    <!-- product section -->
+    <div class="container">
+        <h1>Products</h1>
+
+        <div class="row row-cols-1 row-cols-md-4 g-4 my-4">
+
+            <!-- ng container tag used here to make another struct directive -->
+            <ng-container *ngFor="let prd of products; let i = index">
+
+                <!-- <div class="col" [style.display]="prd.catId!=selectedCatId?'none' : 'block'" *ngIf="prd.quantity!=0"> -->
+                <div class="col">
+                    <!-- 
+                        @if (prd.quantity!==0) {
+                            #prod.style.display="none"
+                        }
+                     -->
+                    <div ProductCard="blue" defaultBgColor="grey" class="card"
+                        [ngStyle]="{'background-color': prd.quantity==1? 'yellow' : 'white'}">
+                        <img [src]="prd.imgUrl" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title"> {{prd.name}}</h5>
+                            <p class="card-text">Quantity: {{prd.quantity}}</p>
+                            <p class="card-text">Price: {{prd.price}}</p>
+
+                            <!-- using template var or reference on the input to use it -->
+                            <input type="number" #itemCount class="form-control">
+
+                            <div class="d-flex justify-content-around">
+                                <button class="btn btn-primary mt-2" (click)="buy(i)">Buy Now</button>
+                                <button class="btn btn-success mt-2" (click)="showDetails(prd.id)">Details</button>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+
+        </div>
+    </div>
+
+    <!-- pipes -->
+
+    <div class="idPipe row">
+        <!-- id split pipe -->
+        <h1 class="my-5">Pipes Examples</h1>
+        <div class="form col-6">
+            <input type="text" class="form-control" placeholder="type your id" [(ngModel)]="NationalID">
+            <div></div>
+
+            <span class="d-block mt-1">Output: {{NationalID | idSplitter}} </span>
+        </div>
+
+        <!-- year form id pipe -->
+        <div class="form col-6">
+
+            <input type="text" class="form-control mb-2" [(ngModel)]="NationalID"
+                placeholder="Enter National ID Number">
+
+            <br>
+            <span>Formatted Birthdate: {{ NationalID | dateFromID: 'FullDate' }}</span>
+
+            <br>
+            <span>Birth Year: {{ NationalID | dateFromID: 'YY' }}</span>
+
+            <br> <span>Birth Month: {{ NationalID | dateFromID: 'MM' }}</span>
+
+            <br> <span>Birth Day: {{ NationalID | dateFromID: 'DD' }}</span>
+
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,25 @@
+<div class="container my-5">
+
+    <div class="row">
+        <div class="col-6 d-flex align-items-left flex-column justify-content-center">
+
+            <!-- save nav operator "?" if available display if null don't display -->
+            <h3>Product Name: <p class="text-danger">{{product?.name}}</p>
+            </h3>
+            <h3>Product price: <p class="text-danger">{{product?.price}}</p>
+            </h3>
+            <div>
+                <button class="btn btn-danger" (click)="goBack()" >Go Back</button>
+            </div>
+
+        </div>
+        <div class="col-6">
+            <img src="{{product?.imgUrl}}" alt="defualt prd img">
+        </div>
+
+    </div>
+
+
+
+    <!-- <h3>Product img: {{product?.imgUrl}}</h3>  -->
+</div>
